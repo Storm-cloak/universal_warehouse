@@ -1,0 +1,22 @@
+{
+  "name": "universal-warehouse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Storm-cloak/universal-warehouse.git"
+  },
+  "author": "Rustam aka Scloak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Storm-cloak/universal-warehouse/issues"
+  },
+  "homepage": "https://github.com/Storm-cloak/universal-warehouse#readme",
+  "dependencies": {
+    "concurrently": "^6.0.0"
+  }
+}

@@ -1,0 +1,8 @@
+query FetchUsers {
+  users {
+    nodes {
+      id
+      username
+    }
+  }
+}

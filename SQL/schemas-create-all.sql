@@ -1,0 +1,12 @@
+--CREATE ALL SCHEMAS-
+
+CREATE SCHEMA sellers;
+CREATE SCHEMA anbar;
+CREATE SCHEMA client;
+CREATE SCHEMA cluster;
+CREATE SCHEMA currency;
+CREATE SCHEMA inventory;
+CREATE SCHEMA private_users;
+CREATE SCHEMA sellers;
+CREATE SCHEMA settings;
+CREATE SCHEMA users;
