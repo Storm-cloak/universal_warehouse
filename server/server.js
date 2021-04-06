@@ -6,7 +6,7 @@ const app = express();
 app.use(
   postgraphile(
     process.env.DATABASE_URL ||
-      "postgres://Scloak:scloak777@localhost:5432/postgraphile",
+    "postgres://postgres:postgres@db:5432/anbax",
     ["anbar", "users"],
     {
       watchPg: true,
@@ -14,6 +14,7 @@ app.use(
       enableCors: true,
       pgDefaultRole: "user_anonymous",
       graphiql: true,
+      retryOnInitFail: true,
       enhanceGraphiql: true,
       jwtSecret: "secret_for_jwts",
       jwtPgTypeIdentifier: "users.jwt",
