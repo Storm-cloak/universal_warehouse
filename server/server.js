@@ -18,6 +18,8 @@ app.use(
       enhanceGraphiql: true,
       jwtSecret: "secret_for_jwts",
       jwtPgTypeIdentifier: "users.jwt",
+      showErrorStack: true,
+      extendedErrors: ["hint", "detail", "errcode"],
       appendPlugins: [
         require("@graphile-contrib/pg-simplify-inflector"),
         require("postgraphile-plugin-connection-filter"),
@@ -27,5 +29,5 @@ app.use(
 );
 
 app.listen({ port: 3000 }, () => {
-  console.log("app listen on port KEK LOL 3000");
+  console.log("app listen on port  3000");
 });

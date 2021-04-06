@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import { CookiesProvider } from "react-cookie";
 import reportWebVitals from "./reportWebVitals";
-
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./config/ThemeConfig";
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </CookiesProvider>
   </React.StrictMode>,
   document.getElementById("root")
