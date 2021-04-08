@@ -1,15 +1,24 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: "Alegreya Sans",
+    h6: {
+      fontSize: "1rem",
+      fontWeight: 500,
+      fontStyle: "normal",
+    },
+  },
   palette: {
     background: {
-      default: "#5025CA",
+      default: "#2C5CCA",
     },
     primary: {
-      main: "#5025CA",
+      main: "#2C5CCA",
+      light: "#FFFFFF",
     },
     secondary: {
-      main: "#FFFFFF",
+      main: "#919399",
     },
   },
 });

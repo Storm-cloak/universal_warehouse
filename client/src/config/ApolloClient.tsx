@@ -5,7 +5,7 @@ import {
   ApolloLink,
 } from "@apollo/client";
 import { useAuthToken } from "./auth";
-const httpLink = createHttpLink({ uri: "http://localhost:3000/graphql" });
+const httpLink = createHttpLink({ uri: "http://172.16.3.124:3000/graphql" });
 
 const authMiddleware = (authToken: string) =>
   new ApolloLink((operation, forward) => {
