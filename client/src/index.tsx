@@ -7,13 +7,16 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./config/ThemeConfig";
 import { UserProvider } from "./context/UserContext";
+import { ToastProvider } from "./context/ToastContext";
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
       <UserProvider>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+        <ToastProvider>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </ToastProvider>
       </UserProvider>
     </CookiesProvider>
   </React.StrictMode>,

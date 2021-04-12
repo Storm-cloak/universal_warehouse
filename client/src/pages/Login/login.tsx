@@ -25,16 +25,17 @@ import * as yup from "yup";
 //                                INTERFACES AND SCHEMAS                                \\
 //======================================================================================\\
 import { UserContext, ContextType } from "../../context/UserContext";
+import { ToastContext, ToastContextType } from "../../context/ToastContext";
 import jwt_decode from "jwt-decode";
 
 interface IFormInput {
   username: string;
   password: string;
 }
-interface IErrors {
-  message: string;
-  hint: string;
-}
+// interface IErrors {
+//   message: string;
+//   hint: string;
+// }
 
 const SignupSchema = yup.object().shape({
   username: yup.string().required("Username is required"),
@@ -48,12 +49,15 @@ const SignupSchema = yup.object().shape({
 const AuthenticationForm = () => {
   const history = useHistory();
   const { user, setUser } = useContext(UserContext) as ContextType;
+  const { showError, showSuccess } = useContext(
+    ToastContext
+  ) as ToastContextType;
   const classes = useStyles();
   //errors hooks
-  const [graphQLErrors, setErrors] = useState<IErrors>({
-    message: "",
-    hint: "",
-  });
+  // const [graphQLErrors, setErrors] = useState<IErrors>({
+  //   message: "RATATAT",
+  //   hint: "",
+  // });
   // react-hook-form boilerplate
   const {
     control,
@@ -75,13 +79,13 @@ const AuthenticationForm = () => {
       setUser(jwt_decode(data.authenticate?.jwt)); // set user info into Context
       reset(); //reset all form inputs
       history.push("/");
+      showSuccess({ msg: "You are successfully logged in" });
     },
     onError(err) {
-      setErrors({
-        message: err.graphQLErrors[0].message,
+      showError({
+        msg: err.graphQLErrors[0].message,
         hint: err.graphQLErrors[0].extensions?.exception.hint,
       });
-      alert("WHOPS");
     },
   });
 
@@ -107,7 +111,11 @@ const AuthenticationForm = () => {
           >
             Log in to Anbar
           </Typography>
-          <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+          <form
+            noValidate
+            className={classes.form}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <FormControl component="fieldset">
               <Controller
                 render={(props) => (
