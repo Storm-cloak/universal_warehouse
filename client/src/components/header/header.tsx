@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import RenderMenu from "./menu";
+import React, { useState, useContext } from "react";
 import {
   AppBar,
   Toolbar,
   Typography,
   Box,
   Badge,
+  Button,
   IconButton,
 } from "@material-ui/core";
 import { useStyles } from "./header.styles";
+import { useHistory } from "react-router";
+import { useLogout } from "../../config/auth";
+import { UserContext, ContextType } from "../../context/UserContext";
+import RenderMenu from "./menu";
+
 //======================================================================================\\
 //                                 IMPORT ICONS                                         \\
 //======================================================================================\\
@@ -22,32 +26,30 @@ import AddBoxOutlinedIcon from "@material-ui/icons/AddBoxOutlined";
 import IndeterminateCheckBoxOutlinedIcon from "@material-ui/icons/IndeterminateCheckBoxOutlined";
 import DescriptionOutlinedIcon from "@material-ui/icons/DescriptionOutlined";
 import AssignmentLateOutlinedIcon from "@material-ui/icons/AssignmentLateOutlined";
-import { useHistory } from "react-router";
 
 //======================================================================================\\
 //                              HEADER COMPONENT                                        \\
 //======================================================================================\\
 export default function Header() {
+  const Logout = useLogout();
   const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [anchorType, setAnchorType] = useState<null | number>(null);
   const isMenuOpen = Boolean(anchorEl);
-
+  const { user } = useContext(UserContext) as ContextType;
   const handleMenuOpen = (
     event: React.MouseEvent<HTMLElement>,
     anchorType: number
   ) => {
     setAnchorEl(event.currentTarget);
     setAnchorType(anchorType);
-    console.log(anchorType);
   };
 
-  const handleMenuClick = (pageURL: any) => {
+  const handleMenuClick = (pageURL: string) => {
     setAnchorEl(null);
     setAnchorType(null);
-    console.log(pageURL);
-    history.push(pageURL);
+    pageURL === "/logout" ? Logout() : history.push(pageURL);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -64,7 +66,13 @@ export default function Header() {
           <Box className={classes.headerOptionsLeft}>
             <Box className={classes.headerOption}>
               <PieChartOutlinedIcon className={classes.icon} />
-              <Typography variant="h6">Dashboard</Typography>
+              <Button
+                color="default"
+                size="large"
+                onClick={() => history.push("/")}
+              >
+                <Typography variant="h6">Dashboard</Typography>
+              </Button>
             </Box>
             <Box className={classes.headerOption}>
               <DomainIcon className={classes.icon} />
@@ -72,7 +80,6 @@ export default function Header() {
               <IconButton
                 aria-label="show more"
                 aria-haspopup="true"
-                onClick={(e) => handleMenuOpen(e, 1)}
                 color="inherit"
               >
                 <ExpandMoreOutlinedIcon />
@@ -84,7 +91,7 @@ export default function Header() {
               <IconButton
                 aria-label="show more"
                 aria-haspopup="true"
-                onClick={(e) => handleMenuOpen(e, 2)}
+                onClick={(e) => handleMenuOpen(e, 1)}
                 color="inherit"
               >
                 <ExpandMoreOutlinedIcon />
@@ -96,7 +103,7 @@ export default function Header() {
               <IconButton
                 aria-label="show more"
                 aria-haspopup="true"
-                onClick={(e) => handleMenuOpen(e, 3)}
+                onClick={(e) => handleMenuOpen(e, 2)}
                 color="inherit"
               >
                 <ExpandMoreOutlinedIcon />
@@ -104,15 +111,57 @@ export default function Header() {
             </Box>
             <Box className={classes.headerOption}>
               <DescriptionOutlinedIcon className={classes.icon} />
-              <Typography variant="h6">Hesabatlar</Typography>
+              <Button
+                color="default"
+                size="large"
+                onClick={() => history.push("/")}
+              >
+                <Typography variant="h6">Hesabatlar</Typography>
+              </Button>
             </Box>
             <Box className={classes.headerOption}>
               <AssignmentLateOutlinedIcon className={classes.icon} />
-              <Typography variant="h6">Limitler</Typography>
+              <Button
+                color="default"
+                size="large"
+                onClick={() => history.push("/")}
+              >
+                <Typography variant="h6">Limitler</Typography>
+              </Button>
             </Box>
             <Box className={classes.headerOption}>
               <DescriptionOutlinedIcon className={classes.icon} />
               <Typography variant="h6">Diger</Typography>
+              <IconButton
+                aria-label="show more"
+                aria-haspopup="true"
+                onClick={(e) => handleMenuOpen(e, 3)}
+                color="inherit"
+              >
+                <ExpandMoreOutlinedIcon />
+              </IconButton>
+            </Box>
+          </Box>
+          <div className={classes.grow} />
+          <Box className={classes.headerOptionsRight}>
+            <Box className={classes.headerOption}>
+              <IconButton
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={17} color="primary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </Box>
+            <Box className={classes.headerOption}>
+              <Typography variant="h6">{user?.userfullname}</Typography>
+            </Box>
+            <Box className={classes.headerOption}>
+              <AccountCircleOutlinedIcon
+                fontSize="large"
+                className={classes.icon}
+              />
               <IconButton
                 aria-label="show more"
                 aria-haspopup="true"
@@ -122,24 +171,6 @@ export default function Header() {
                 <ExpandMoreOutlinedIcon />
               </IconButton>
             </Box>
-          </Box>
-          <div className={classes.grow} />
-          <Box className={classes.headerOptionsRight}>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="primary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <Typography variant="h6">UsernameHere</Typography>
-            <AccountCircleOutlinedIcon className={classes.icon} />
-            <IconButton
-              aria-label="show more"
-              aria-haspopup="true"
-              onClick={(e) => handleMenuOpen(e, 5)}
-              color="inherit"
-            >
-              <ExpandMoreOutlinedIcon />
-            </IconButton>
           </Box>
           <RenderMenu
             anchorEl={anchorEl}

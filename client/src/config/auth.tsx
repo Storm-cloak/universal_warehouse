@@ -15,10 +15,10 @@ export const useLogout = () => {
   const [, , removeAuthToken] = useAuthToken();
   const apolloClient = useApolloClient();
 
-  const logout = async () => {
+  const Logout = async () => {
     await apolloClient.clearStore(); // we remove all information in the store
     removeAuthToken();
-    window.location.reload();
+    localStorage.removeItem("info");
   };
-  return logout;
+  return Logout;
 };

@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import { useAppApolloClient } from "./config/ApolloClient";
 import "./App.css";
 import { ApolloProvider } from "@apollo/client";
@@ -8,8 +13,8 @@ import { useAuthToken } from "./config/auth";
 import NotFound from "./pages/NotFound/NotFound";
 import Login from "./pages/Login/login";
 import WarehouseIncomeMain from "./pages/WarehouseIncome/warehouse.income.main";
-import Main from "./pages/Main/main";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Dashboard from "./pages/Dashboard/dashboard";
 
 function App() {
   const apolloClient = useAppApolloClient();
@@ -24,7 +29,11 @@ function App() {
       <CssBaseline />
       <Router>
         <Switch>
-          <Route path="/login" component={Login} />
+          <Route
+            exact
+            path="/login"
+            render={() => (authToken ? <Redirect to="/" /> : <Login />)}
+          />
           <ProtectedRoute
             {...defaultProtectedRouteProps}
             exact
@@ -35,7 +44,7 @@ function App() {
             {...defaultProtectedRouteProps}
             exact
             path="/"
-            component={Main}
+            component={Dashboard}
           />
           <Route component={NotFound} />
         </Switch>

@@ -14,11 +14,29 @@ const theme = createMuiTheme({
       default: "#2C5CCA",
     },
     primary: {
-      main: "#2C5CCA",
-      light: "#FFFFFF",
+      main: "#254ECA",
     },
     secondary: {
       main: "#919399",
+    },
+  },
+  shape: {
+    borderRadius: 12,
+  },
+  overrides: {
+    MuiIconButton: {
+      root: {
+        padding: 0,
+        color: "#FFFFFF",
+        textTransform: "capitalize",
+      },
+    },
+    MuiButton: {
+      root: {
+        padding: 0,
+        color: "#FFFFFF",
+        textTransform: "capitalize",
+      },
     },
   },
 });

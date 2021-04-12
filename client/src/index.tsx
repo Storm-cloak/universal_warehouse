@@ -6,12 +6,15 @@ import { CookiesProvider } from "react-cookie";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./config/ThemeConfig";
+import { UserProvider } from "./context/UserContext";
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
+      <UserProvider>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </UserProvider>
     </CookiesProvider>
   </React.StrictMode>,
   document.getElementById("root")

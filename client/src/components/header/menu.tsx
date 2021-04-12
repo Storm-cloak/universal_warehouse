@@ -1,41 +1,58 @@
-import { Menu, MenuItem } from "@material-ui/core";
+import { Menu, MenuItem, Box, Typography } from "@material-ui/core";
+import { useStyles } from "./header.styles";
+import Fade from "@material-ui/core/Fade";
+
+//======================================================================================\\
+//                                 IMPORT ICONS                                         \\
+//======================================================================================\\
+import DomainIcon from "@material-ui/icons/Domain";
+import UndoIcon from "@material-ui/icons/Undo";
+import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import CloudOutlinedIcon from "@material-ui/icons/CloudOutlined";
+import FindReplaceOutlinedIcon from "@material-ui/icons/FindReplaceOutlined";
+import GroupOutlinedIcon from "@material-ui/icons/GroupOutlined";
+import SettingsIcon from "@material-ui/icons/Settings";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import BlurCircularIcon from "@material-ui/icons/BlurCircular";
+//======================================================================================\\
+//                                HEADER ROUTES DECLARATION                             \\
+//======================================================================================\\
 const menuItems = [
-  //Anbar routes
-  [
-    {
-      menuTitle: "Anbar",
-      pageURL: "/",
-    },
-  ],
   //Medaxil routes
   [
-    {
-      menuTitle: "Medaxil",
-      pageURL: "/warehouseincome",
-    },
+    { menuTitle: "Medaxil", pageURL: "/warehouseincome", MenuIcon: DomainIcon },
+    { menuTitle: "Arxiv", pageURL: "/", MenuIcon: CloudOutlinedIcon },
   ],
   // Mexaric routes
   [
-    {
-      menuTitle: "Mexaric",
-      pageURL: "/",
-    },
+    { menuTitle: "Mexaric", pageURL: "/", MenuIcon: UndoIcon },
+    { menuTitle: "Transfer", pageURL: "/", MenuIcon: SwapHorizIcon },
+    { menuTitle: "Silinme", pageURL: "/", MenuIcon: DeleteForeverIcon },
+    { menuTitle: "Arxiv", pageURL: "/", MenuIcon: CloudOutlinedIcon },
   ],
   //Diger routes
   [
     {
-      menuTitle: "Diger",
+      menuTitle: "Inventarizasiya",
       pageURL: "/",
+      MenuIcon: FindReplaceOutlinedIcon,
     },
+    { menuTitle: "Musteriler", pageURL: "/", MenuIcon: GroupOutlinedIcon },
   ],
   //user Routes
   [
-    {
-      menuTitle: "Login",
-      pageURL: "/",
-    },
+    { menuTitle: "Admin Panel", pageURL: "/", MenuIcon: BlurCircularIcon },
+    { menuTitle: "Settings", pageURL: "/", MenuIcon: SettingsIcon },
+    { menuTitle: "Logout", pageURL: "/logout", MenuIcon: ExitToAppIcon },
   ],
 ];
+
+interface IMenuItem {
+  menuTitle: string;
+  pageURL: string;
+  MenuIcon: any;
+}
 
 const RenderMenu = ({
   anchorEl,
@@ -43,26 +60,40 @@ const RenderMenu = ({
   isMenuOpen,
   handleMenuClick,
   handleMenuClose,
-}: any) => (
-  <Menu
-    anchorEl={anchorEl}
-    anchorOrigin={{ vertical: "top", horizontal: "right" }}
-    keepMounted
-    transformOrigin={{ vertical: "top", horizontal: "right" }}
-    open={isMenuOpen}
-    onClose={handleMenuClose}
-  >
-    {anchorType &&
-      menuItems[anchorType - 1].map((menuItem: any) => {
-        const { menuTitle, pageURL } = menuItem;
-        return (
-          <MenuItem onClick={() => handleMenuClick(pageURL)}>
-            {menuTitle}
-          </MenuItem>
-        );
-      })}
-    {console.log(menuItems)}
-  </Menu>
-);
+}: any) => {
+  const classes = useStyles();
+  return (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      keepMounted
+      getContentAnchorEl={null}
+      elevation={8}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+      TransitionComponent={Fade}
+    >
+      {anchorType &&
+        menuItems[anchorType - 1].map((menuItem: IMenuItem) => {
+          const { menuTitle, pageURL, MenuIcon } = menuItem;
+          return (
+            <MenuItem onClick={() => handleMenuClick(pageURL)}>
+              <Box className={classes.subOptionsLeft}>
+                <MenuIcon className={classes.subOptionIcon}></MenuIcon>
+                <Typography variant="subtitle1">{menuTitle}</Typography>
+              </Box>
+            </MenuItem>
+          );
+        })}
+    </Menu>
+  );
+};
 
 export default RenderMenu;
