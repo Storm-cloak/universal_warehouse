@@ -12,7 +12,7 @@ import ProtectedRoute, { ProtectedRouteProps } from "./config/protectedRoute";
 import { useAuthToken } from "./config/auth";
 import NotFound from "./pages/NotFound/NotFound";
 import Login from "./pages/Login/login";
-import WarehouseIncomeMain from "./pages/WarehouseIncome/warehouse.income.main";
+import WarehouseIncomeMain from "./pages/WarehouseIncome/warehouse.income.main.js";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Dashboard from "./pages/Dashboard/dashboard";
 

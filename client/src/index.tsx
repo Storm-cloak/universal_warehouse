@@ -1,3 +1,5 @@
+/// <reference types="@welldone-software/why-did-you-render" />
+import whyDidYouRender from "@welldone-software/why-did-you-render";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -8,6 +10,14 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./config/ThemeConfig";
 import { UserProvider } from "./context/UserContext";
 import { ToastProvider } from "./context/ToastContext";
+
+whyDidYouRender(React, {
+  onlyLogs: true,
+  titleColor: "green",
+  diffNameColor: "aqua",
+  trackAllPureComponents: true,
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>

@@ -5,8 +5,7 @@ const app = express();
 
 app.use(
   postgraphile(
-    process.env.DATABASE_URL ||
-    "postgres://postgres:postgres@db:5432/anbax",
+    process.env.DATABASE_URL || "postgres://postgres:postgres@db:5432/anbax",
     ["anbar", "users"],
     {
       watchPg: true,

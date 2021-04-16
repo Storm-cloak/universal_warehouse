@@ -21,9 +21,19 @@ const theme = createMuiTheme({
     },
   },
   shape: {
-    borderRadius: 12,
+    borderRadius: 0,
   },
   overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        html: {
+          height: "100%",
+        },
+        body: {
+          height: "100%",
+        },
+      },
+    },
     MuiIconButton: {
       root: {
         padding: 0,

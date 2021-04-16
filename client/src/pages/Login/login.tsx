@@ -69,7 +69,7 @@ const AuthenticationForm = () => {
     resolver: yupResolver(SignupSchema),
   });
 
-  //token hooks`
+  //token hooks
   const [_, setAuthToken, removeAuthtoken] = useAuthToken();
 
   //login - generated graphql mutation

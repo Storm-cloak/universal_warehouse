@@ -1,0 +1,12 @@
+query FetchProductsTreeView {
+  warehouses {
+    nodes {
+      id
+      parentId
+      title
+      title2
+      storageId
+      nodeId
+    }
+  }
+}

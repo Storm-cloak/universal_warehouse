@@ -1,10 +1,23 @@
 import React from "react";
-import Alert from "../../components/Alert/alert.component";
+import TreeViewData from "./TreeView/treeview.component";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: "flex",
+      flex: 1,
+    },
+  })
+);
 const Dashboard = () => {
+  const classes = useStyles();
   return (
     <>
-      <h1>DASHBOARD</h1>
-      {/* <Alert></Alert> */}
+      <div className={classes.root}>
+        <TreeViewData />
+        <h1>RIGHT PART</h1>
+      </div>
     </>
   );
 };

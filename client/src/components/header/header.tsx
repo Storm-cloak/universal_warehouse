@@ -31,7 +31,7 @@ import AssignmentLateOutlinedIcon from "@material-ui/icons/AssignmentLateOutline
 //                              HEADER COMPONENT                                        \\
 //======================================================================================\\
 export default function Header() {
-  const Logout = useLogout();
+  const logout = useLogout();
   const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -49,7 +49,7 @@ export default function Header() {
   const handleMenuClick = (pageURL: string) => {
     setAnchorEl(null);
     setAnchorType(null);
-    pageURL === "/logout" ? Logout() : history.push(pageURL);
+    pageURL === "/logout" ? logout() : history.push(pageURL);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -57,7 +57,7 @@ export default function Header() {
   };
 
   return (
-    <div className={classes.root}>
+    <div>
       <AppBar className={classes.header} position="static">
         <Toolbar className={classes.toolBar}>
           <Typography variant="h5" className={classes.title}>
