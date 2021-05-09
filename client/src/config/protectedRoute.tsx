@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
-import Header from "../components/header/header";
+import Header from "../components/Header/header";
 
 export interface ProtectedRouteProps extends RouteProps {
   isAuthenticated: boolean;

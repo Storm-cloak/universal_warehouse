@@ -1,22 +1,42 @@
 import cloneDeep from "lodash/cloneDeep";
-export function reshapeData(data: any) {
+
+export function reshapeData(data: any, searchValue: string) {
   const copyData: any = cloneDeep(data?.warehouses?.nodes);
-  const idMapping = copyData?.reduce((acc: any, el: any, i: any) => {
-    acc[el.id] = i;
-    return acc;
-  }, {});
-  let root;
-  copyData.forEach((el: any) => {
-    // Handle the root element
-    if (el.parentId === null) {
-      root = el;
-      return;
+  const TREE = makeTree(copyData, null);
+  if (searchValue) {
+    const filteredTree = searchInTree(TREE, searchValue);
+    console.log(filteredTree);
+    return [filteredTree];
+  }
+  return TREE;
+}
+
+function makeTree(nodes, parentId) {
+  return nodes
+    .filter((node) => node.parentId === parentId)
+    .reduce(
+      (tree, node) => [
+        ...tree,
+        {
+          ...node,
+          children: makeTree(nodes, node.id),
+        },
+      ],
+      []
+    );
+}
+
+function searchInTree(nodes, value) {
+  let result;
+  nodes.some((node) => {
+    let children;
+    if (node.title["AZ"].includes(value) || node.title2["AZ"].includes(value)) {
+      return (result = node);
     }
-    // Use our mapping to locate the parent element in our data array
-    const parentEl = copyData[idMapping[el.parentId]];
-    // Add our current el to its parent's `children` array
-    parentEl.children = [...(parentEl.children || []), el];
+    if (node.children && (children = searchInTree(node.children, value))) {
+      return (result = Object.assign({}, node, [children]));
+    }
   });
 
-  return root;
+  return result;
 }

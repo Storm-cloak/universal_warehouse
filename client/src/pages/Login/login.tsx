@@ -2,7 +2,7 @@
 //                               IMPORTS                                                \\
 //======================================================================================\\
 
-import React, { useState, useContext } from "react";
+import { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import {
@@ -63,9 +63,9 @@ const AuthenticationForm = () => {
     control,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<IFormInput>({
-    mode: "onBlur",
+    mode: "all",
     resolver: yupResolver(SignupSchema),
   });
 
@@ -160,6 +160,7 @@ const AuthenticationForm = () => {
               type="submit"
               variant="contained"
               color="primary"
+              disabled={!isValid}
             >
               Sign in
             </Button>

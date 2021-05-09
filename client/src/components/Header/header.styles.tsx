@@ -3,15 +3,15 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
-      background: "rgba(0, 0, 0, 0.6)",
+      backgroundColor: "rgb(16,33,81)", //dark blue
     },
     toolBar: {
       minHeight: 40,
     },
     title: {
-      marginRight: 20,
-      paddingRight: 20,
-      borderRight: `1px solid rgba(255, 255, 255, 0.24)`,
+      marginRight: theme.spacing(2.5),
+      paddingRight: theme.spacing(2.5),
+      borderRight: "1px solid rgba(255, 255, 255, 0.24)",
     },
     headerOptionsLeft: {
       display: "flex",
@@ -33,20 +33,30 @@ export const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      paddingRight: 20,
+      paddingRight: theme.spacing(2.5), //20px
+      "& a": {
+        padding: 0,
+      },
     },
     icon: {
       fontSize: 24,
-      color: theme.palette.secondary.main,
-      paddingRight: 6,
+      color: "#919399",
+      paddingRight: theme.spacing(0.75), //6px
     },
     subOptionIcon: {
       fontSize: 30,
-      paddingRight: 10,
+      paddingRight: theme.spacing(1.5),
       color: theme.palette.primary.main,
     },
     grow: {
       flex: 1,
+    },
+    avatar: {
+      width: theme.spacing(4),
+      height: theme.spacing(4),
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
+      marginRight: theme.spacing(1),
     },
   })
 );

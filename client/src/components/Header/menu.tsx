@@ -15,6 +15,8 @@ import GroupOutlinedIcon from "@material-ui/icons/GroupOutlined";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import BlurCircularIcon from "@material-ui/icons/BlurCircular";
+import StorageIcon from "@material-ui/icons/Storage";
+import { SvgIconProps } from "@material-ui/core/SvgIcon";
 //======================================================================================\\
 //                                HEADER ROUTES DECLARATION                             \\
 //======================================================================================\\
@@ -39,6 +41,7 @@ const menuItems = [
       MenuIcon: FindReplaceOutlinedIcon,
     },
     { menuTitle: "Musteriler", pageURL: "/", MenuIcon: GroupOutlinedIcon },
+    { menuTitle: "Anbarlar", pageURL: "/", MenuIcon: StorageIcon },
   ],
   //user Routes
   [
@@ -51,7 +54,7 @@ const menuItems = [
 interface IMenuItem {
   menuTitle: string;
   pageURL: string;
-  MenuIcon: any;
+  MenuIcon: React.ElementType<SvgIconProps>;
 }
 
 const RenderMenu = ({
@@ -79,12 +82,13 @@ const RenderMenu = ({
       open={isMenuOpen}
       onClose={handleMenuClose}
       TransitionComponent={Fade}
+      // disableScrollLock
     >
       {anchorType &&
-        menuItems[anchorType - 1].map((menuItem: IMenuItem) => {
+        menuItems[anchorType - 1].map((menuItem: IMenuItem, index) => {
           const { menuTitle, pageURL, MenuIcon } = menuItem;
           return (
-            <MenuItem onClick={() => handleMenuClick(pageURL)}>
+            <MenuItem key={index} onClick={() => handleMenuClick(pageURL)}>
               <Box className={classes.subOptionsLeft}>
                 <MenuIcon className={classes.subOptionIcon}></MenuIcon>
                 <Typography variant="subtitle1">{menuTitle}</Typography>

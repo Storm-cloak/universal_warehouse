@@ -5,7 +5,7 @@ import {
   ApolloLink,
   from,
 } from "@apollo/client";
-import { ErrorResponse, onError } from "@apollo/client/link/error";
+// import { ErrorResponse, onError } from "@apollo/client/link/error";
 import { useAuthToken, useLogout } from "./auth";
 const httpLink = createHttpLink({ uri: "http://172.16.3.124:3000/graphql" });
 

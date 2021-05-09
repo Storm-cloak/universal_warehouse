@@ -5,32 +5,31 @@ const theme = createMuiTheme({
     fontFamily: "Alegreya Sans",
     h6: {
       fontSize: "1rem",
-      fontWeight: 500,
-      fontStyle: "normal",
+      // fontWeight: 500,
     },
   },
   palette: {
     background: {
-      default: "#2C5CCA",
+      default: "red", //grey
     },
     primary: {
-      main: "#254ECA",
+      main: "#254ECA", //blue
     },
     secondary: {
-      main: "#919399",
+      main: "#FFF", //white
     },
   },
   shape: {
-    borderRadius: 0,
+    borderRadius: 12,
   },
   overrides: {
     MuiCssBaseline: {
       "@global": {
-        html: {
-          height: "100%",
-        },
         body: {
-          height: "100%",
+          minHeight: "100vh",
+        },
+        html: {
+          overflow: "hidden",
         },
       },
     },
@@ -46,6 +45,7 @@ const theme = createMuiTheme({
         padding: 0,
         color: "#FFFFFF",
         textTransform: "capitalize",
+        minWidth: 50,
       },
     },
   },

@@ -11,7 +11,7 @@ app.use(
       watchPg: true,
       dynamicJson: true,
       enableCors: true,
-      pgDefaultRole: "user_auth",
+      pgDefaultRole: "user_anonymous",
       graphiql: true,
       retryOnInitFail: true,
       enhanceGraphiql: true,
